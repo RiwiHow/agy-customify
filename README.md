@@ -1,10 +1,10 @@
 # agy-customify
 
-通过 CDP 为 Antigravity 注入自定义终端字体，并为原生文件查看器补全编辑、保存、新建与删除等文件管理能力。基于 Bun 运行，无需额外依赖。
+Inject custom terminal fonts into Antigravity via CDP and extend its native file viewer with editing, saving, file creation, and deletion capabilities. Runs on Bun with no additional dependencies.
 
-## 快速开始
+## Quick Start
 
-1. 在项目根目录的 `config.json` 中配置 Antigravity 可执行文件路径和调试端口：
+1. Set the Antigravity executable path and debugging port in `config.json` at the project root:
 
    ```json
    {
@@ -13,39 +13,39 @@
    }
    ```
 
-2. 运行启动与注入命令（若 CDP 端口尚未开启，会自动以 `--remote-debugging-port` 启动 Antigravity 并完成注入）：
+2. Run the launcher and injector (if the CDP port is not already available, it automatically starts Antigravity with `--remote-debugging-port` and injects the customizations):
 
    ```powershell
    bun run start
    ```
 
-   > 保持进程运行即可自动监听新窗口与重载刷新。常用选项：`--exe <path>`、`--port <port>`、`--no-launch`（不自动启动程序）、`--list`（仅列出页面）、`--once`（单次注入）、`--match <text>`（按 URL 过滤）。
+   > Keep the process running to automatically watch for new windows and page reloads. Common options: `--exe <path>`, `--port <port>`, `--no-launch` (disable automatic launch), `--list` (list pages only), `--once` (inject once), and `--match <text>` (filter by URL).
 
-## 主要特性
+## Key Features
 
-- **终端字体**：注入自定义等宽字体（可在 `src/injections/styles.css` 中配置）。
-- **原生文件编辑**：
-  - 在原生查看器中无缝切换 **Preview / Raw / Edit** 模式。
-  - 支持 `Ctrl+S` / `Cmd+S` 保存、行号与 Prism 语法高亮。
-  - 自动保留未保存草稿，关闭时带确认提示；具备外部文件修改冲突保护。
-- **文件与目录管理**：
-  - 支持右侧文件树新建文件、新建文件夹与右键删除。
-  - 直接调用宿主原生上下文菜单与 Language Server 文件接口，无外部服务依赖。
+- **Terminal fonts**: Inject custom monospace fonts (configurable in `src/injections/styles.css`).
+- **Native file editing**:
+  - Seamlessly switch between **Preview / Raw / Edit** modes in the native viewer.
+  - Save with `Ctrl+S` / `Cmd+S`, with line numbers and Prism syntax highlighting.
+  - Automatically retain unsaved drafts, prompt for confirmation when closing, and protect against conflicts caused by external file changes.
+- **File and directory management**:
+  - Create files and folders, and delete items via the context menu in the right-hand file tree.
+  - Use the host's native context menus and Language Server file APIs directly, with no external service dependencies.
 
-## 测试
+## Tests
 
 ```powershell
 bun run test
 ```
 
-## 项目结构
+## Project Structure
 
 ```text
 src/
-├─ cli.js                  # CDP 连接与注入管理
+├─ cli.js                  # CDP connection and injection management
 └─ injections/
-   ├─ styles.css           # 终端字体、编辑器与 UI 增强样式
-   ├─ native-files.js      # 宿主环境与文件/菜单接口适配
-   ├─ raw-text-editor.js   # 编辑器核心（行号、高亮、快捷键）
-   └─ file-editor-entry.js # 原生查看器入口与 UI 增强
+   ├─ styles.css           # Terminal fonts, editor styles, and UI enhancements
+   ├─ native-files.js      # Host environment and file/menu API adapters
+   ├─ raw-text-editor.js   # Editor core (line numbers, highlighting, shortcuts)
+   └─ file-editor-entry.js # Native viewer entry point and UI enhancements
 ```
