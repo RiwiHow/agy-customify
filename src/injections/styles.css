@@ -1,0 +1,358 @@
+/* Terminal Font */
+.xterm .xterm-rows,
+.xterm .xterm-rows span {
+  font-family: "JetBrains Mono", Consolas, "Sarasa UI SC", monospace !important;
+}
+
+/* Raw Text Editor */
+[data-agy-raw-editor] {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  display: flex;
+  padding-left: 8px;
+  overflow: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  line-height: var(--agy-code-line-height, 19.2px);
+  contain: strict;
+}
+
+[data-agy-raw-editor][hidden] {
+  display: none !important;
+}
+
+[data-agy-code-gutter] {
+  position: relative;
+  flex: none;
+  overflow: hidden;
+  user-select: none;
+  color: var(--editor-line-number-foreground, rgba(128, 128, 128, .5));
+  font-variant-numeric: tabular-nums;
+  contain: strict;
+}
+
+[data-agy-code-gutter-track] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 32px;
+  text-align: right;
+  will-change: transform;
+}
+
+[data-agy-code-gutter-track] > div[data-active] {
+  color: var(--editor-line-number-active-foreground, var(--foreground));
+}
+
+[data-agy-code-input] {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  contain: strict;
+}
+
+[data-agy-code-highlight] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  width: max-content;
+  box-sizing: border-box;
+  margin: 0 !important;
+  padding: 8px 12px 8px 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: inherit;
+  font: inherit !important;
+  line-height: inherit !important;
+  white-space: pre !important;
+  tab-size: 2;
+  pointer-events: none;
+  will-change: transform;
+}
+
+[data-agy-code-highlight] code {
+  font: inherit !important;
+  line-height: inherit !important;
+  background: transparent !important;
+  padding: 0 !important;
+  white-space: pre !important;
+}
+
+[data-agy-code-input] > [data-agy-text-editor] {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  resize: none;
+  border: 0;
+  border-radius: 0;
+  padding: 8px 12px 8px 0;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  tab-size: 2;
+  white-space: pre;
+  overflow: auto;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  caret-color: var(--foreground);
+}
+
+[data-agy-text-editor]::selection {
+  background: rgba(100, 150, 230, .3);
+}
+
+[data-agy-text-editor][hidden] {
+  display: none !important;
+}
+
+/* File Editor Toolbar, Tree Tools, Modal & Toast */
+[data-agy-file-tools],
+[data-agy-tree-tools] {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  font-size: 12px;
+}
+
+[data-agy-file-tools] button,
+[data-agy-modal] button,
+[data-agy-tree-tools] button {
+  color: var(--secondary-foreground);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 7px;
+  cursor: pointer;
+}
+
+[data-agy-file-tools] button:hover,
+[data-agy-tree-tools] button:hover {
+  background: var(--secondary);
+}
+
+[data-agy-file-tools] button:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+[data-agy-edit-mode] {
+  display: flex;
+  align-items: center;
+  padding: 2px 8px;
+  border: 0;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: inherit;
+  color: var(--muted-foreground);
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+[data-agy-edit-mode]:hover {
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+[data-agy-edit-mode][aria-pressed="true"] {
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  font-weight: 500;
+}
+
+[data-agy-edit-mode]:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+[data-agy-edit-selected] > [role="button"] {
+  background: transparent !important;
+  color: var(--muted-foreground) !important;
+  font-weight: 400 !important;
+}
+
+[data-agy-mode-group] {
+  display: flex;
+  gap: 4px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-right: 6px;
+  background: var(--background);
+}
+
+[data-agy-edit-host] {
+  position: relative !important;
+}
+
+[data-agy-edit-host][data-agy-editing] > :not([data-agy-raw-editor]) {
+  visibility: hidden;
+  pointer-events: none;
+  content-visibility: hidden;
+}
+
+[data-agy-tree-tools] {
+  margin: 0 12px 4px;
+}
+
+[data-agy-modal] {
+  position: fixed !important;
+  inset: 0 !important;
+  margin: auto !important;
+  box-sizing: border-box;
+  width: min(420px, calc(100vw - 48px));
+  height: fit-content;
+  max-height: calc(100dvh - 48px);
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--background);
+  color: var(--foreground);
+  padding: 24px;
+  box-shadow: 0 16px 64px #0002, 0 2px 8px #0001;
+  font-family: inherit;
+}
+
+[data-agy-modal]::backdrop {
+  background: rgba(0, 0, 0, .22);
+  backdrop-filter: blur(2px);
+}
+
+[data-agy-modal] header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+[data-agy-modal] header strong {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+[data-agy-modal] button {
+  min-height: 32px;
+  padding: 5px 13px;
+  font: inherit;
+  font-size: 13px;
+  line-height: 20px;
+  border-radius: 7px;
+}
+
+[data-agy-modal] button:hover {
+  background: var(--secondary);
+}
+
+[data-agy-modal] button:focus-visible {
+  outline: 2px solid var(--ring, var(--foreground));
+  outline-offset: 2px;
+}
+
+[data-agy-modal] button[data-agy-modal-close] {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  min-height: 28px;
+  padding: 0;
+  margin: -4px -6px -4px 0;
+  border: 0;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+[data-agy-modal] button[data-agy-modal-close]:hover {
+  background: var(--secondary);
+  color: var(--foreground);
+}
+
+[data-agy-modal] p {
+  margin: 10px 0 18px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--muted-foreground);
+}
+
+[data-agy-modal] label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--secondary-foreground);
+}
+
+[data-agy-modal] input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 11px;
+  margin: 0;
+  color: var(--foreground);
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font: inherit;
+  font-size: 13px;
+  line-height: 20px;
+  outline: none;
+}
+
+[data-agy-modal] input:focus {
+  border-color: var(--ring, var(--foreground));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--ring, var(--foreground)) 12%, transparent);
+}
+
+[data-agy-modal] input::placeholder {
+  color: var(--muted-foreground);
+  opacity: .7;
+}
+
+[data-agy-modal] footer {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+[data-agy-modal] button[data-agy-primary] {
+  background: var(--primary, var(--foreground));
+  color: var(--primary-foreground, var(--background));
+  border-color: transparent;
+}
+
+[data-agy-modal] button[data-agy-primary]:hover {
+  filter: brightness(.92);
+}
+
+[data-agy-modal][data-agy-danger] button[data-agy-primary] {
+  background: #dc3535;
+  color: white;
+}
+
+[data-agy-toast] {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2147483647;
+  max-width: 480px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--background);
+  color: var(--foreground);
+  box-shadow: 0 4px 24px #0003;
+  white-space: pre-wrap;
+}
