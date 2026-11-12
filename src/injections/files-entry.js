@@ -2,7 +2,6 @@
   const key = '__agyFilesEntry';
   window[key]?.dispose();
   const selector = '[data-testid="new-tab-card-open-file"]';
-  let disposed = false;
 
   function reconcile() {
     for (const button of document.querySelectorAll(selector)) {
@@ -18,19 +17,17 @@
     const ctx = window.__agyNativeFiles.context(button);
     event.preventDefault();
     event.stopImmediatePropagation();
-    Promise.resolve(ctx.open()).catch(error => console.error('[agy-customify] Open Files:', error));
+    ctx.open();
   }
 
   const observer = new MutationObserver(reconcile);
   function start() {
-    if (disposed) return;
     reconcile();
-    observer.observe(document.body, { childList: true, characterData: true, subtree: true });
+    observer.observe(document.body, { childList: true, subtree: true });
     document.addEventListener('click', onClick, true);
   }
   window[key] = {
     dispose() {
-      disposed = true;
       observer.disconnect();
       document.removeEventListener('DOMContentLoaded', start);
       document.removeEventListener('click', onClick, true);
