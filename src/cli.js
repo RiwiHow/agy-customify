@@ -54,6 +54,7 @@ const script = [
   styleScript,
   ...(await Promise.all([
     './injections/native-files.js',
+    './injections/files-entry.js',
     './injections/raw-text-editor.js',
     './injections/file-editor-entry.js',
   ].map(path => Bun.file(new URL(path, import.meta.url)).text()))),
